@@ -31,5 +31,16 @@ public class OnlinecomplaintreportController {
         return map;
 
     }
+    @CrossOrigin(origins = "*")
+    @PostMapping(path="/signin",consumes = "application/json",produces = "application/json")
+    public List<OnlineComplaintReport> Signin(@RequestBody OnlineComplaintReport o){
+        String emailid=o.getEmailid().toString();
+        String password=o.getPassword().toString();
+        System.out.println(emailid);
+        System.out.println(password);
+        return (List<OnlineComplaintReport>) dao.SignIn(o.getEmailid(),o.getPassword());
+
+
+    }
 
 }
