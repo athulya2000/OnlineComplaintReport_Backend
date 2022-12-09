@@ -42,5 +42,11 @@ public class OnlinecomplaintreportController {
 
 
     }
+    @CrossOrigin(origins = "*")
+    @PostMapping(path="/viewprofile",consumes = "application/json",produces = "application/json")
+    public List<OnlineComplaintReport> ViewProfile(@RequestBody OnlineComplaintReport o){
+        String id=String.valueOf(o.getId());
+        return (List<OnlineComplaintReport>) dao.ViewProfile(o.getId());
+    }
 
 }
