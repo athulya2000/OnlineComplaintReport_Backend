@@ -12,7 +12,7 @@ public interface OnlineComplaintReportDao extends CrudRepository<OnlineComplaint
     @Query(value="SELECT `id`, `address`, `dob`, `emailid`, `name`, `password`, `phoneno` FROM `registration` WHERE `emailid`= :emailid AND`password`= :password",nativeQuery = true)
     List<OnlineComplaintReport> SignIn(@Param("emailid") String emailid,@Param("password") String password);
 
-
     @Query(value="SELECT `id`, `address`, `dob`, `emailid`, `name`, `password`, `phoneno` FROM `registration` WHERE `id`= :id",nativeQuery = true)
     List<OnlineComplaintReport> ViewProfile(@Param("id") Integer id);
+
 }
