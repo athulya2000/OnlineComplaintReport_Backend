@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class ComplaintsController {
@@ -28,5 +29,11 @@ public class ComplaintsController {
       String userid=String.valueOf(c.getUserid());
         System.out.println(userid);
         return (List<Complaints>) daoc.ViewMyComplaints(c.getUserid());
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping(path="/viewall")
+    public List<Map<String,String>> ViewAll(){
+     return (List<Map<String,String>>) daoc.Complaints();
     }
 }
