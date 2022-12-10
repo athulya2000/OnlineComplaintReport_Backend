@@ -33,20 +33,29 @@ public class OnlinecomplaintreportController {
     }
     @CrossOrigin(origins = "*")
     @PostMapping(path="/signin",consumes = "application/json",produces = "application/json")
-    public List<OnlineComplaintReport> Signin(@RequestBody OnlineComplaintReport o){
+    public Map<String,String> Signin(@RequestBody OnlineComplaintReport o){
         String emailid=o.getEmailid().toString();
         String password=o.getPassword().toString();
         System.out.println(emailid);
         System.out.println(password);
-        return (List<OnlineComplaintReport>) dao.SignIn(o.getEmailid(),o.getPassword());
-
+        List<OnlineComplaintReport> result=(List<OnlineComplaintReport>) dao.SignIn(o.getEmailid(),o.getPassword());
+        HashMap<String,String> st=new HashMap<>();
+        st.put("userId",String.valueOf(result.get(0).getId()));
+        if(result.size()==0){
+            st.put("status","failed");
+        }
+        else{
+            st.put("status","success");
+        }
+        return st;
 
     }
     @CrossOrigin(origins = "*")
     @PostMapping(path="/viewprofile",consumes = "application/json",produces = "application/json")
-    public List<OnlineComplaintReport> ViewProfile(@RequestBody OnlineComplaintReport o){
-        String id=String.valueOf(o.getId());
+    public List<OnlineComplaintReport> ViewProfile(@RequestBody OnlineComplaintReport o) {
+        String id = String.valueOf(o.getId());
+        System.out.println(id);
         return (List<OnlineComplaintReport>) dao.ViewProfile(o.getId());
-    }
 
+    }
 }
